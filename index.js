@@ -5,6 +5,7 @@ import env from "dotenv";
 import bodyParser from "body-parser";
 
 const app = express();
+const { Pool } = pkg;
 
 const PORT = process.env.PORT || 3000;
 
