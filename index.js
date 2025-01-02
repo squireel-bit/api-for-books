@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import pg from 'pg';
+import { Pool } from 'pg';
 import env from "dotenv";
 import bodyParser from "body-parser";
 
@@ -14,14 +14,22 @@ app.use(bodyParser.json());
 
 
 
-const db = new pg.Client({
-    user: process.env.POSTGRES_USER,
-    host: process.env.POSTGRES_HOST,
-    database: process.env.POSTGRES_DATABASE,
-    password: process.env.POSTGRES_PASSWORD,
-    port: process.env.POSTGRES_URL,
-});
-db.connect();
+const db = new Pool({
+
+    connectionString: process.env.DATABASE_URL,
+  
+    ssl: {
+  
+      rejectUnauthorized: false,
+  
+    },
+  
+  });
+
+  db.connect((err) => {
+    if (err) throw err
+    console.log("Connect to PostgreSQL successfully!")
+})
 
 // Routes
 
