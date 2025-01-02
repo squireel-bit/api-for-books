@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Pool } from 'pg';
+import pkg from 'pg';
 import env from "dotenv";
 import bodyParser from "body-parser";
 
